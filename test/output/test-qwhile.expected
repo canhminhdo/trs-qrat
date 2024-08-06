@@ -1,0 +1,80 @@
+==========================================
+reduce in QWHILE-SEMANTICS : buildGate(I, v('q1), v('q1) -> 1) == I(1) .
+result Bool: true
+==========================================
+reduce in QWHILE-SEMANTICS : buildGate(X, v('q1), v('q1) -> 1) == X(1) .
+result Bool: true
+==========================================
+reduce in QWHILE-SEMANTICS : buildGate(Y, v('q1), v('q1) -> 1) == Y(1) .
+result Bool: true
+==========================================
+reduce in QWHILE-SEMANTICS : buildGate(Z, v('q1), v('q1) -> 1) == Z(1) .
+result Bool: true
+==========================================
+reduce in QWHILE-SEMANTICS : buildGate(H, v('q1), v('q1) -> 1) == H(1) .
+result Bool: true
+==========================================
+reduce in QWHILE-SEMANTICS : buildGate(S, v('q1), v('q1) -> 1) == S(1) .
+result Bool: true
+==========================================
+reduce in QWHILE-SEMANTICS : buildGate(T, v('q1), v('q1) -> 1) == T(1) .
+result Bool: true
+==========================================
+reduce in QWHILE-SEMANTICS : buildGate(CX, v('q1),v('q2), (v('q1) -> 1) v('q2)
+    -> 2) == CX(1, 2) .
+result Bool: true
+==========================================
+reduce in QWHILE-SEMANTICS : buildGate(CY, v('q1),v('q2), (v('q1) -> 1) v('q2)
+    -> 2) == CY(1, 2) .
+result Bool: true
+==========================================
+reduce in QWHILE-SEMANTICS : buildGate(CZ, v('q1),v('q2), (v('q1) -> 1) v('q2)
+    -> 2) == CZ(1, 2) .
+result Bool: true
+==========================================
+reduce in QWHILE-SEMANTICS : buildGate(SWAP, v('q1),v('q2), (v('q1) -> 1) v(
+    'q2) -> 2) == SWAP(1, 2) .
+result Bool: true
+==========================================
+reduce in QWHILE-SEMANTICS : buildGate(CCX, v('q1),v('q2),v('q3), (v('q1) -> 1)
+    (v('q2) -> 2) v('q3) -> 3) == CCX(1, 2, 3) .
+result Bool: true
+==========================================
+reduce in QWHILE-SEMANTICS : buildGate(CCZ, v('q1),v('q2),v('q3), (v('q1) -> 1)
+    (v('q2) -> 2) v('q3) -> 3) == CCZ(1, 2, 3) .
+result Bool: true
+==========================================
+reduce in QWHILE-SEMANTICS : buildGate(CSWAP, v('q1),v('q2),v('q3), (v('q1) ->
+    1) (v('q2) -> 2) v('q3) -> 3) == CSWAP(1, 2, 3) .
+result Bool: true
+==========================================
+reduce in QWHILE-SEMANTICS : buildProj(0, v('q1), v('q1) -> 1) == P0(1) .
+result Bool: true
+==========================================
+reduce in QWHILE-SEMANTICS : buildProj(1, v('q1), v('q1) -> 1) == P1(1) .
+result Bool: true
+==========================================
+rewrite in QWHILE-SEMANTICS : < v('q1) := X[v('q1)] ; v('q1) := H[v('q1)],|0>,
+    v('q1) -> 0 > .
+result Config: < emp,(-1 .* 1 ./ sqrt(2)) . |1> + (1 ./ sqrt(2)) . |0>,v('q1)
+    -> 0 >
+==========================================
+search [5] in QWHILE-SEMANTICS : < v('q1) := X[v('q1)] ; v('q1) := H[v('q1)] ;
+    while M[v('q1)] = 1 do v('q1) := H[v('q1)] od,|0>,v('q1) -> 0 > =>* < emp,
+    V,E > .
+
+V --> (1 ./ sqrt(2)) . |0>
+E --> v('q1) -> 0
+
+V --> -1/2 . |0>
+E --> v('q1) -> 0
+
+V --> (1/2 .* 1 ./ sqrt(2)) . |0>
+E --> v('q1) -> 0
+
+V --> -1/4 . |0>
+E --> v('q1) -> 0
+
+V --> (1/4 .* 1 ./ sqrt(2)) . |0>
+E --> v('q1) -> 0
+Bye.

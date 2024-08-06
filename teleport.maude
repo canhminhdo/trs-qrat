@@ -1,0 +1,42 @@
+load qwhile.maude
+
+mod TELEPORT is
+    pr QWHILE-SEMANTICS .
+
+    var C : Cpx .
+    --- defining initial states
+    ops a b : -> Cpx .
+    --- eq | a |^2 .+ | b |^2 = 1 .
+    --- eq C .* | a |^2 .+ C .* | b |^2 = C .
+    eq a .* (a)^* .+ b .* (b)^* = 1 .
+    eq C .* a .* (a)^* .+ C .* b .* (b)^* = C .
+
+    op prog : -> Prog .
+    op qs : -> Vect .
+    op env : -> Env .
+    eq qs = (a . |0> + b . |1>) (x) |0> (x) |0> .
+    eq env = (
+        (v('q1) -> 0)
+        (v('q2) -> 1)
+        (v('q3) -> 2)
+    ) .
+    eq prog = (v('q2) := H[v('q2)]) ; 
+           (v('q2), v('q3) := CX[v('q2), v('q3)]) ;
+           (v('q1), v('q2) := CX[v('q1), v('q2)]) ;
+           (v('q1) := H[v('q1)]) ;
+           (if M[v('q2)] = 1 then v('q3) := X[v('q3)] else skip fi) ;
+           (if M[v('q1)] = 1 then v('q3) := Z[v('q3)] else skip fi) .
+endm
+
+eof
+
+in debug.maude
+
+red < prog, qs, env > .
+
+search in TELEPORT : < prog, qs, env > =>! < emp, V:Vect, E:Env > .
+
+red in TELEPORT : || (a .* 1/2) . |0> (x) |0> (x) |0> + (b .* 1/2) . |0> (x) |0> (x) |1> ||^2 .
+red in TELEPORT : || (a .* 1/2) . |1> (x) |0> (x) |0> + (b .* 1/2) . |1> (x) |0> (x) |1> ||^2 .
+red in TELEPORT : || (a .* 1/2) . |0> (x) |1> (x) |0> + (b .* 1/2) . |0> (x) |1> (x) |1> ||^2 .
+red in TELEPORT : || (a .* 1/2) . |1> (x) |1> (x) |0> + (b .* 1/2) . |1> (x) |1> (x) |1> ||^2 .
