@@ -9,7 +9,7 @@ This repository presents QRAT - a reachability analysis tool for quantum program
 ## How to install
 - Clone the source code to your computer and go to the source code directory.
 ```console
-git clone --recurse-submodules https://github.com/canhminhdo/qrat.git && cd qrat
+git clone --recurse-submodules https://github.com/canhminhdo/QRAT.git && cd QRAT
 ```
 
 - Feed a Maude file that is the formal specification of quantum programs being verified into Maude.

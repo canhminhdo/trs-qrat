@@ -1,6 +1,6 @@
 load ket-as4qc/qc.maude
 
-fmod QWHILE-SYNTAX is
+fmod SYNTAX is
     pr QID .
     pr NAT .
 
@@ -33,7 +33,7 @@ fmod QWHILE-SYNTAX is
 endfm
 
 fmod ENV is
-    pr QWHILE-SYNTAX .
+    pr SYNTAX .
     
     sort Entry Env .
     subsort Entry < Env .
@@ -51,7 +51,7 @@ fmod ENV is
     eq (V -> N) (V -> N) = (V -> N) .
 endfm
 
-fmod QC-ADAPTER is
+fmod QC-EXT is
     pr ENV .
     pr QC .
     
@@ -65,9 +65,9 @@ fmod QC-ADAPTER is
     subsort Gate < GateSet .
 
     --- build projectors for measurement
-    op buildProj : Nat Var Env -> Mat .
-    eq buildProj(0, V, E) = P0(E[V]) .
-    eq buildProj(1, V, E) = P1(E[V]) .
+    op buildMeasOp : Nat Var Env -> Mat .
+    eq buildMeasOp(0, V, E) = P0(E[V]) .
+    eq buildMeasOp(1, V, E) = P1(E[V]) .
 
     --- build quantum gates
     op buildGate : Gate Reg Env -> Mat .
@@ -105,8 +105,8 @@ fmod QC-ADAPTER is
     eq U in US = false [owise] .
 endfm
 
-mod QWHILE-SEMANTICS is
-    pr QC-ADAPTER .
+mod SEMANTICS is
+    pr QC-EXT .
 
     sort Config .
     op <_,_,_> : Prog Vect Env -> Config .
@@ -121,14 +121,14 @@ mod QWHILE-SEMANTICS is
     --- convention for the empty program
     op emp : -> Com [ctor] .
     eq emp ; S = S .
-    --- rewrite rules for transition rulesit 
+    --- rewrite rules for transition rules
     rl  [SK]  : < skip, V, E > => < emp, V, E > .
     rl  [UT]  : < R := U[R], V, E > => < emp, buildGate(U, R, E) x V, E > .
     crl [SC]  : < S1 ; S2, V, E > => < S1' ; S2, V', E > if < S1, V, E > => < S1', V', E > /\ S1 =/= S1' .
-    rl  [IF0] : < if M[Q] = 1 then S1 else S2 fi, V, E > => < S2, buildProj(0, Q, E) x V, E > .
-    rl  [IF1] : < if M[Q] = 1 then S1 else S2 fi, V, E > => < S1, buildProj(1, Q, E) x V, E > .
-    rl  [L0]  : < while M[Q] = 1 do S od, V, E > => < emp, buildProj(0, Q, E) x V, E > .
-    rl  [L1]  : < while M[Q] = 1 do S od, V, E > => < S ; (while M[Q] = 1 do S od), buildProj(1, Q, E) x V, E > .
+    rl  [IF0] : < if M[Q] = 1 then S1 else S2 fi, V, E > => < S2, buildMeasOp(0, Q, E) x V, E > .
+    rl  [IF1] : < if M[Q] = 1 then S1 else S2 fi, V, E > => < S1, buildMeasOp(1, Q, E) x V, E > .
+    rl  [L0]  : < while M[Q] = 1 do S od, V, E > => < emp, buildMeasOp(0, Q, E) x V, E > .
+    rl  [L1]  : < while M[Q] = 1 do S od, V, E > => < S ; (while M[Q] = 1 do S od), buildMeasOp(1, Q, E) x V, E > .
 endm
 
 eof
@@ -137,6 +137,6 @@ in debug.maude
 red < v('q1) := X[v('q1)] ; v('q1) := H[v('q1)], |0>, (v('q1) -> 0) > .
 
 rewrite < v('q1) := X[v('q1)] ; v('q1) := H[v('q1)], |0>, (v('q1) -> 0) > .
-search [3] in QWHILE-SEMANTICS : 
+search [3] in SEMANTICS : 
 < v('q1) := X[v('q1)] ; v('q1) := H[v('q1)] ; while M[v('q1)] = 1 do v('q1) := H[v('q1)] od, |0>, (v('q1) -> 0) > 
 =>* < emp, V:Vect, E:Env > .

@@ -16,13 +16,13 @@ red buildGate(CCX, (v('q1), v('q2), v('q3)), ((v('q1) -> 1) (v('q2) -> 2) (v('q3
 red buildGate(CCZ, (v('q1), v('q2), v('q3)), ((v('q1) -> 1) (v('q2) -> 2) (v('q3) -> 3))) == CCZ(1, 2, 3) .
 red buildGate(CSWAP, (v('q1), v('q2), v('q3)), ((v('q1) -> 1) (v('q2) -> 2) (v('q3) -> 3))) == CSWAP(1, 2, 3) .
 
---- test `buildProj`
-red buildProj(0, v('q1), (v('q1) -> 1)) == P0(1) .
-red buildProj(1, v('q1), (v('q1) -> 1)) == P1(1) .
+--- test `buildMeasOp`
+red buildMeasOp(0, v('q1), (v('q1) -> 1)) == P0(1) .
+red buildMeasOp(1, v('q1), (v('q1) -> 1)) == P1(1) .
 
 --- test some toy examples
-rewrite in QWHILE-SEMANTICS : < v('q1) := X[v('q1)] ; v('q1) := H[v('q1)], |0>, (v('q1) -> 0) > .
+rewrite in SEMANTICS : < v('q1) := X[v('q1)] ; v('q1) := H[v('q1)], |0>, (v('q1) -> 0) > .
 
-search [5] in QWHILE-SEMANTICS :
+search [5] in SEMANTICS :
 < v('q1) := X[v('q1)] ; v('q1) := H[v('q1)] ; while M[v('q1)] = 1 do v('q1) := H[v('q1)] od, |0>, (v('q1) -> 0) > 
 =>* < emp, V:Vect, E:Env > .

@@ -1,7 +1,7 @@
 load qwhile.maude
 
 mod TELEPORT is
-    pr QWHILE-SEMANTICS .
+    pr SEMANTICS .
 
     var C : Cpx .
     --- defining initial states
