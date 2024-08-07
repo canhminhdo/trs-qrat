@@ -130,16 +130,3 @@ mod SEMANTICS is
     rl  [L0]  : < while M[Q] = 1 do S od, V, E > => < emp, buildMeasOp(0, Q, E) x V, E > .
     rl  [L1]  : < while M[Q] = 1 do S od, V, E > => < S ; (while M[Q] = 1 do S od), buildMeasOp(1, Q, E) x V, E > .
 endm
-
-eof
-
-in debug.maude
-search [1] in SEMANTICS : < v('q) := H[v('q)]; while M[v('q)] = 1 do v('q) := H[v('q)] od, |1>, (v('q) -> 0) > 
-=>! < emp, V:Vect, E:Env > .
-
-red < v('q1) := X[v('q1)] ; v('q1) := H[v('q1)], |0>, (v('q1) -> 0) > .
-
-rewrite < v('q1) := X[v('q1)] ; v('q1) := H[v('q1)], |0>, (v('q1) -> 0) > .
-search [3] in SEMANTICS : 
-< v('q1) := X[v('q1)] ; v('q1) := H[v('q1)] ; while M[v('q1)] = 1 do v('q1) := H[v('q1)] od, |0>, (v('q1) -> 0) > 
-=>* < emp, V:Vect, E:Env > .

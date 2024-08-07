@@ -59,21 +59,9 @@ rewrite in SEMANTICS : < v('q1) := X[v('q1)] ; v('q1) := H[v('q1)],|0>,v('q1)
 result Config: < emp,(-1 .* 1 ./ sqrt(2)) . |1> + (1 ./ sqrt(2)) . |0>,v('q1)
     -> 0 >
 ==========================================
-search [5] in SEMANTICS : < v('q1) := X[v('q1)] ; v('q1) := H[v('q1)] ; while
-    M[v('q1)] = 1 do v('q1) := H[v('q1)] od,|0>,v('q1) -> 0 > =>* < emp,V,E > .
+search [1] in SEMANTICS : < v('q) := H[v('q)] ; while M[v('q)] = 1 do v('q) :=
+    H[v('q)] od,|1>,v('q) -> 0 > =>! < emp,V,E > .
 
 V --> (1 ./ sqrt(2)) . |0>
-E --> v('q1) -> 0
-
-V --> -1/2 . |0>
-E --> v('q1) -> 0
-
-V --> (1/2 .* 1 ./ sqrt(2)) . |0>
-E --> v('q1) -> 0
-
-V --> -1/4 . |0>
-E --> v('q1) -> 0
-
-V --> (1/4 .* 1 ./ sqrt(2)) . |0>
-E --> v('q1) -> 0
+E --> v('q) -> 0
 Bye.

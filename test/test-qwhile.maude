@@ -23,6 +23,5 @@ red buildMeasOp(1, v('q1), (v('q1) -> 1)) == P1(1) .
 --- test some toy examples
 rewrite in SEMANTICS : < v('q1) := X[v('q1)] ; v('q1) := H[v('q1)], |0>, (v('q1) -> 0) > .
 
-search [5] in SEMANTICS :
-< v('q1) := X[v('q1)] ; v('q1) := H[v('q1)] ; while M[v('q1)] = 1 do v('q1) := H[v('q1)] od, |0>, (v('q1) -> 0) > 
-=>* < emp, V:Vect, E:Env > .
+search [1] in SEMANTICS : < v('q) := H[v('q)]; while M[v('q)] = 1 do v('q) := H[v('q)] od, |1>, (v('q) -> 0) > 
+=>! < emp, V:Vect, E:Env > .

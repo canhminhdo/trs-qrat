@@ -1,6 +1,6 @@
 ### QRAT - A Reachability Analysis Tool for Quantum Programs
 ---
-This repository presents QRAT - a reachability analysis tool for quantum programs, which was developed in Maude.
+This repository presents QRAT - a reachability analysis tool for quantum programs that was implemented in Maude.
 
 ## Dependencies
 - Maude is a programming/specification language based on rewriting logic. How to download and install Maude can be found [here](http://maude.cs.illinois.edu/w/index.php/The_Maude_System).
@@ -14,7 +14,7 @@ git clone --recurse-submodules https://github.com/canhminhdo/QRAT.git && cd QRAT
 
 - Feed a Maude file that is the formal specification of quantum programs being verified into Maude.
 
-For example, we can type the following command in CLI in order to conduct rechability analysis for Quantum Teleportation Protocol specified in the `teleport.maude` file:
+For example, we can type the following command in CLI in order to conduct reachability analysis for Quantum Teleportation specified in the `teleport.maude` file:
 
 ```console
 maude teleport.maude
@@ -24,7 +24,7 @@ maude teleport.maude
 
 ## Case Studies
 We successfully verify the correctness of some quantum programs with reachability analysis:
-- Quantum Teleportation Protocol
+- Quantum Teleportation
 - ...
 
 ## Publication

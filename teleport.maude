@@ -28,15 +28,4 @@ mod TELEPORT is
            (if M[v('q1)] = 1 then v('q3) := Z[v('q3)] else skip fi) .
 endm
 
-eof
-
-in debug.maude
-
-red < prog, qs, env > .
-
 search in TELEPORT : < prog, qs, env > =>! < emp, V:Vect, E:Env > .
-
-red in TELEPORT : || (a .* 1/2) . |0> (x) |0> (x) |0> + (b .* 1/2) . |0> (x) |0> (x) |1> ||^2 .
-red in TELEPORT : || (a .* 1/2) . |1> (x) |0> (x) |0> + (b .* 1/2) . |1> (x) |0> (x) |1> ||^2 .
-red in TELEPORT : || (a .* 1/2) . |0> (x) |1> (x) |0> + (b .* 1/2) . |0> (x) |1> (x) |1> ||^2 .
-red in TELEPORT : || (a .* 1/2) . |1> (x) |1> (x) |0> + (b .* 1/2) . |1> (x) |1> (x) |1> ||^2 .
