@@ -134,6 +134,9 @@ endm
 eof
 
 in debug.maude
+search [1] in SEMANTICS : < v('q) := H[v('q)]; while M[v('q)] = 1 do v('q) := H[v('q)] od, |1>, (v('q) -> 0) > 
+=>! < emp, V:Vect, E:Env > .
+
 red < v('q1) := X[v('q1)] ; v('q1) := H[v('q1)], |0>, (v('q1) -> 0) > .
 
 rewrite < v('q1) := X[v('q1)] ; v('q1) := H[v('q1)], |0>, (v('q1) -> 0) > .
