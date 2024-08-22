@@ -121,12 +121,13 @@ mod SEMANTICS is
     --- convention for the empty program
     op emp : -> Com [ctor] .
     eq emp ; S = S .
+    eq S ; emp = S .
     --- rewrite rules for transition rules
     rl  [SK]  : < skip, V, E > => < emp, V, E > .
     rl  [UT]  : < R := U[R], V, E > => < emp, buildGate(U, R, E) x V, E > .
     crl [SC]  : < S1 ; S2, V, E > => < S1' ; S2, V', E > if < S1, V, E > => < S1', V', E > /\ S1 =/= S1' .
-    rl  [IF0] : < if M[Q] = 1 then S1 else S2 fi, V, E > => < S2, buildMeasOp(0, Q, E) x V, E > .
-    rl  [IF1] : < if M[Q] = 1 then S1 else S2 fi, V, E > => < S1, buildMeasOp(1, Q, E) x V, E > .
-    rl  [L0]  : < while M[Q] = 1 do S od, V, E > => < emp, buildMeasOp(0, Q, E) x V, E > .
-    rl  [L1]  : < while M[Q] = 1 do S od, V, E > => < S ; (while M[Q] = 1 do S od), buildMeasOp(1, Q, E) x V, E > .
+    crl [IF0] : < if M[Q] = 1 then S1 else S2 fi, V, E > => < S2, V', E > if V' := buildMeasOp(0, Q, E) x V /\ V' =/= O .
+    crl [IF1] : < if M[Q] = 1 then S1 else S2 fi, V, E > => < S1, V', E > if V' := buildMeasOp(1, Q, E) x V /\ V' =/= O .
+    crl [L0]  : < while M[Q] = 1 do S od, V, E > => < emp, V', E > if V' := buildMeasOp(0, Q, E) x V /\ V' =/= O .
+    crl [L1]  : < while M[Q] = 1 do S od, V, E > => < S ; (while M[Q] = 1 do S od), V', E > if V' := buildMeasOp(1, Q, E) x V /\ V' =/= O .
 endm
