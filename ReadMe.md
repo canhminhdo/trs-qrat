@@ -1,6 +1,6 @@
-### QRAT - A Reachability Analysis Tool for Quantum Programs
+### TRS-QRAT: A Reachability Analysis Tool for Quantum Programs
 ---
-This repository presents QRAT - a reachability analysis tool for quantum programs that was implemented in Maude.
+This repository presents TRS-QRAT, a reachability analysis tool for quantum programs, utilizing a term rewriting system that was implemented in Maude.
 
 ## Dependencies
 - Maude is a programming/specification language based on rewriting logic. How to download and install Maude can be found [here](http://maude.cs.illinois.edu/w/index.php/The_Maude_System).
