@@ -1,4 +1,4 @@
-### TRS-QRAT: A Reachability Analysis Tool for Quantum Programs
+### TRS-QRAT: A Reachability Analysis Tool for Quantum Programs Using a Term Rewriting System
 ---
 This repository presents TRS-QRAT, a reachability analysis tool for quantum programs, utilizing a term rewriting system that was implemented in Maude.
 
