@@ -28,4 +28,4 @@ We successfully verify the correctness of some quantum programs with reachabilit
 - ...
 
 ## Publication
-- TBA
+- Canh Minh Do and Kazuhiro Ogata. ["An Executable Operational Semantics of Quantum Programs and Its Application"](https://doi.org/10.1007/978-981-96-1621-3_2), SFPVV 2025.
