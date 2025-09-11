@@ -9,7 +9,7 @@ This repository presents TRS-QRAT, a reachability analysis tool for quantum prog
 ## How to install
 - Clone the source code to your computer and go to the source code directory.
 ```console
-git clone --recurse-submodules https://github.com/canhminhdo/QRAT.git && cd QRAT
+git clone --recurse-submodules https://github.com/canhminhdo/trs-qrat.git && cd trs-qrat
 ```
 
 - Feed a Maude file that is the formal specification of quantum programs being verified into Maude.
