@@ -20,12 +20,14 @@ fmod SYNTAX is
     --- measurement
     op M[_] : Var -> Meas .
 
+    --- for empty program
+    op emp : -> Prog [ctor] .
     --- for skip
     op skip : -> Com [ctor] .
     --- for unitary transformation
     op _:=_[_] : Reg Gate Reg -> Com [ctor] .
     --- for sequential composition
-    op _;_ : Com Com ->  Com [ctor prec 42 gather (e E)] . --- right-associativity
+    op _;_ : Prog Prog ->  Prog [ctor assoc prec 42 id: emp] .
     --- for if_then_else_fi
     op if_=_then_else_fi : Meas Nat Prog Prog -> Com [ctor] .
     --- for while ... od
@@ -111,23 +113,19 @@ mod SEMANTICS is
     sort Config .
     op <_,_,_> : Prog Vect Env -> Config .
 
-    vars S S1 S1' S2 : Prog .
+    vars S S' S1 S1' S2 : Prog .
     vars V V' : Vect .
     vars Q : Var .
     vars R : Reg .
     vars U : Gate .
     vars E : Env .
     
-    --- convention for the empty program
-    op emp : -> Com [ctor] .
-    eq emp ; S = S .
-    eq S ; emp = S .
     --- rewrite rules for transition rules
-    rl  [SK]  : < skip, V, E > => < emp, V, E > .
-    rl  [UT]  : < R := U[R], V, E > => < emp, buildGate(U, R, E) x V, E > .
-    crl [SC]  : < S1 ; S2, V, E > => < S1' ; S2, V', E > if < S1, V, E > => < S1', V', E > /\ S1 =/= S1' .
-    crl [IF0] : < if M[Q] = 1 then S1 else S2 fi, V, E > => < S2, V', E > if V' := buildMeasOp(0, Q, E) x V /\ V' =/= O .
-    crl [IF1] : < if M[Q] = 1 then S1 else S2 fi, V, E > => < S1, V', E > if V' := buildMeasOp(1, Q, E) x V /\ V' =/= O .
-    crl [L0]  : < while M[Q] = 1 do S od, V, E > => < emp, V', E > if V' := buildMeasOp(0, Q, E) x V /\ V' =/= O .
-    crl [L1]  : < while M[Q] = 1 do S od, V, E > => < S ; (while M[Q] = 1 do S od), V', E > if V' := buildMeasOp(1, Q, E) x V /\ V' =/= O .
+    rl  [SK]  : < skip ; S, V, E > => < S, V, E > .
+    rl  [UT]  : < R := U[R] ; S, V, E > => < S, buildGate(U, R, E) x V, E > .
+    --- crl [SC]  : < S1 ; S2, V, E > => < S1' ; S2, V', E > if < S1, V, E > => < S1', V', E > /\ S1 =/= S1' .
+    crl [IF0] : < if M[Q] = 1 then S1 else S2 fi ; S, V, E > => < S2 ; S, V', E > if V' := buildMeasOp(0, Q, E) x V /\ V' =/= O .
+    crl [IF1] : < if M[Q] = 1 then S1 else S2 fi ; S, V, E > => < S1 ; S, V', E > if V' := buildMeasOp(1, Q, E) x V /\ V' =/= O .
+    crl [L0]  : < while M[Q] = 1 do S od ; S', V, E > => < S', V', E > if V' := buildMeasOp(0, Q, E) x V /\ V' =/= O .
+    crl [L1]  : < while M[Q] = 1 do S od ; S', V, E > => < S ; (while M[Q] = 1 do S od) ; S', V', E > if V' := buildMeasOp(1, Q, E) x V /\ V' =/= O .
 endm

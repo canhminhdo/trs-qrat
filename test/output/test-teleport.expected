@@ -1,5 +1,5 @@
 ==========================================
-search in TELEPORT : < prog,qs,env > =>! < emp,V:Vect,E:Env > .
+search in TELEPORT : < prog, qs, env > =>! < emp, V:Vect, E:Env > .
 
 V:Vect --> (a .* 1/2) . |0>(x)|0>(x)|0> + (b .* 1/2) . |0>(x)|0>(x)|1>
 E:Env --> (v('q1) -> 0) (v('q2) -> 1) v('q3) -> 2

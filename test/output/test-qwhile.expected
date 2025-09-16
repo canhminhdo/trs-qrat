@@ -20,32 +20,32 @@ result Bool: true
 reduce in SEMANTICS : buildGate(T, v('q1), v('q1) -> 1) == T(1) .
 result Bool: true
 ==========================================
-reduce in SEMANTICS : buildGate(CX, v('q1),v('q2), (v('q1) -> 1) v('q2) -> 2)
+reduce in SEMANTICS : buildGate(CX, v('q1), v('q2), (v('q1) -> 1) v('q2) -> 2)
     == CX(1, 2) .
 result Bool: true
 ==========================================
-reduce in SEMANTICS : buildGate(CY, v('q1),v('q2), (v('q1) -> 1) v('q2) -> 2)
+reduce in SEMANTICS : buildGate(CY, v('q1), v('q2), (v('q1) -> 1) v('q2) -> 2)
     == CY(1, 2) .
 result Bool: true
 ==========================================
-reduce in SEMANTICS : buildGate(CZ, v('q1),v('q2), (v('q1) -> 1) v('q2) -> 2)
+reduce in SEMANTICS : buildGate(CZ, v('q1), v('q2), (v('q1) -> 1) v('q2) -> 2)
     == CZ(1, 2) .
 result Bool: true
 ==========================================
-reduce in SEMANTICS : buildGate(SWAP, v('q1),v('q2), (v('q1) -> 1) v('q2) -> 2)
-    == SWAP(1, 2) .
+reduce in SEMANTICS : buildGate(SWAP, v('q1), v('q2), (v('q1) -> 1) v('q2) ->
+    2) == SWAP(1, 2) .
 result Bool: true
 ==========================================
-reduce in SEMANTICS : buildGate(CCX, v('q1),v('q2),v('q3), (v('q1) -> 1) (v(
+reduce in SEMANTICS : buildGate(CCX, v('q1), v('q2), v('q3), (v('q1) -> 1) (v(
     'q2) -> 2) v('q3) -> 3) == CCX(1, 2, 3) .
 result Bool: true
 ==========================================
-reduce in SEMANTICS : buildGate(CCZ, v('q1),v('q2),v('q3), (v('q1) -> 1) (v(
+reduce in SEMANTICS : buildGate(CCZ, v('q1), v('q2), v('q3), (v('q1) -> 1) (v(
     'q2) -> 2) v('q3) -> 3) == CCZ(1, 2, 3) .
 result Bool: true
 ==========================================
-reduce in SEMANTICS : buildGate(CSWAP, v('q1),v('q2),v('q3), (v('q1) -> 1) (v(
-    'q2) -> 2) v('q3) -> 3) == CSWAP(1, 2, 3) .
+reduce in SEMANTICS : buildGate(CSWAP, v('q1), v('q2), v('q3), (v('q1) -> 1) (
+    v('q2) -> 2) v('q3) -> 3) == CSWAP(1, 2, 3) .
 result Bool: true
 ==========================================
 reduce in SEMANTICS : buildMeasOp(0, v('q1), v('q1) -> 1) == P0(1) .
@@ -54,13 +54,13 @@ result Bool: true
 reduce in SEMANTICS : buildMeasOp(1, v('q1), v('q1) -> 1) == P1(1) .
 result Bool: true
 ==========================================
-rewrite in SEMANTICS : < v('q1) := X[v('q1)] ; v('q1) := H[v('q1)],|0>,v('q1)
+rewrite in SEMANTICS : < v('q1) := X[v('q1)] ; v('q1) := H[v('q1)], |0>, v('q1)
     -> 0 > .
-result Config: < emp,(-1 .* 1 ./ sqrt(2)) . |1> + (1 ./ sqrt(2)) . |0>,v('q1)
+result Config: < emp, (-1 .* 1 ./ sqrt(2)) . |1> + (1 ./ sqrt(2)) . |0>, v('q1)
     -> 0 >
 ==========================================
 search [1] in SEMANTICS : < v('q) := H[v('q)] ; while M[v('q)] = 1 do v('q) :=
-    H[v('q)] od,|1>,v('q) -> 0 > =>! < emp,V,E > .
+    H[v('q)] od, |1>, v('q) -> 0 > =>! < emp, V, E > .
 
 V --> (1 ./ sqrt(2)) . |0>
 E --> v('q) -> 0
